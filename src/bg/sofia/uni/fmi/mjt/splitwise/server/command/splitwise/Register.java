@@ -22,6 +22,7 @@ public class Register extends SplitwiseCommand {
 
         String username = command.arguments()[0];
         Profile newProfile = new Profile(username);
+        newProfile.setNotifications(false);
 
         SplitwiseDatabase splitwiseDatabase = (SplitwiseDatabase) database;
         splitwiseDatabase.getProfilesRepository().add(newProfile);

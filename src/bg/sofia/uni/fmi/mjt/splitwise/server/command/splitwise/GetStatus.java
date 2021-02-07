@@ -19,7 +19,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
-
+//get friendlist moje da implement-na
 public class GetStatus extends SplitwiseCommand { //silno ne raboti
 
     private static final String FRIENDS_TITLE = "Friends:" + Delimiters.LINE_SEPARATOR;
@@ -106,7 +106,6 @@ public class GetStatus extends SplitwiseCommand { //silno ne raboti
         status.append(OWED_BY_FRIENDS);
         status.append(owedByFriends.stream().collect(Collectors.joining()));
         status.append(Delimiters.LINE_SEPARATOR);
-//neshto ne bachka kakto trqbwa
 
         status.append(OWED_BY_YOU);
         status.append(owedByMe.stream().collect(Collectors.joining()));

@@ -25,15 +25,18 @@ public class AddFriend extends SplitwiseCommand {
             return authResponse;
         }
 
+        String requestingUser = authResponse.split(Delimiters.HASHTAG)[1];
         String requestedUser = command.arguments()[0];
 
         if(!profileExists(splitwiseDatabase, requestedUser)) {
             return String.format(Messages.NO_SUCH_REGISTERED, requestedUser, Delimiters.LINE_SEPARATOR);
         }
 
-        Profile requestedUserProfile = splitwiseDatabase.getProfilesRepository().getByUsername(requestedUser);
+        if(requestedUser.equals(requestingUser)) {
+            return String.format(Messages.CANNOT_ADD_YOUSELF_AS_FRIEND, Delimiters.LINE_SEPARATOR);
+        }
 
-        String requestingUser = authResponse.split(Delimiters.HASHTAG)[1];
+        Profile requestedUserProfile = splitwiseDatabase.getProfilesRepository().getByUsername(requestedUser);
 
         Group friendGroup = new Group(requestingUser, Delimiters.TWO_FRIEND_GROUP, Set.of(requestedUserProfile));
 
@@ -44,7 +47,6 @@ public class AddFriend extends SplitwiseCommand {
         splitwiseDatabase.getGroupsRepository().add(friendGroup);
         Profile requestingUserProfile = splitwiseDatabase.getProfilesRepository().getByUsername(requestingUser);
 
-        //тук да сложа добавяне на нов приятел в профилите и на двамата
         requestingUserProfile.addFriend(requestedUserProfile);
         requestedUserProfile.addFriend(requestingUserProfile);
 

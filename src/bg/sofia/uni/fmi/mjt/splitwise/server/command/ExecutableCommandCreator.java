@@ -34,14 +34,14 @@ public class ExecutableCommandCreator {
         String commandStringRepres = extractIthWordFrom(request[0], 1);
 
         if (!POSSIBLE_CMD.contains(commandStringRepres)) {
-            throw new UnknownCommandException(Messages.UKNOWN_COMMAND);
+            throw new UnknownCommandException(Messages.UNKNOWN_COMMAND);
         }
 
         String[] allWords = request[0].replaceAll(Delimiters.LINE_SEPARATOR, Delimiters.EMPTY_STRING).split(Delimiters.SPACE);
         String[] arguments = Arrays.copyOfRange(allWords, 2, allWords.length);
 
         if (!hasEnoughArguments(commandStringRepres, arguments)) {
-            throw new UnknownCommandException(Messages.UKNOWN_COMMAND);
+            throw new UnknownCommandException(Messages.UNKNOWN_COMMAND);
         }
 
         Command command = new Command(sessionId, commandStringRepres, arguments);
@@ -59,7 +59,8 @@ public class ExecutableCommandCreator {
                     Commands.SPLIT,
                     Commands.SPLIT_GROUP,
                     Commands.PAYED,
-                    Commands.GET_STATUS -> new ConfirmLoggedIn(command);
+                    Commands.GET_STATUS,
+                    Commands.GET_HISTORY -> new ConfirmLoggedIn(command);
             case Commands.HELP -> new ConfirmHelp(command);
             case Commands.REGISTER -> new ConfirmRegistration(command);
             case Commands.LOGIN -> new ConfirmLogin(command);
@@ -97,6 +98,7 @@ public class ExecutableCommandCreator {
             case Commands.DISCONNECT:
             case Commands.GET_STATUS:
             case Commands.HELP:
+            case Commands.GET_HISTORY:
                 return arguments.length == 0;
             case Commands.ADD_FRIEND:
                 return arguments.length == 1;

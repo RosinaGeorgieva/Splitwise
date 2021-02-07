@@ -11,6 +11,7 @@ import bg.sofia.uni.fmi.mjt.splitwise.server.record.Group;
 import bg.sofia.uni.fmi.mjt.splitwise.server.record.Profile;
 import bg.sofia.uni.fmi.mjt.splitwise.server.util.finals.Delimiters;
 import bg.sofia.uni.fmi.mjt.splitwise.server.util.finals.Filenames;
+import bg.sofia.uni.fmi.mjt.splitwise.server.util.finals.Formats;
 import bg.sofia.uni.fmi.mjt.splitwise.server.util.finals.Messages;
 
 import java.util.Set;
@@ -50,7 +51,10 @@ public class SplitGroup  extends SplitwiseCommand {
             if(!member.equals(requestingUserProfile)) {
                 Debt debt = new Debt(member.getUsername(), requestingUser, amountOfDebt, reason);
                 splitwiseDatabase.getDebtRepository().add(debt);
-                saveToFile(debt.toString(), Filenames.DEBTS);
+                if(member.hasSetNotifications()) {
+                    String notification = String.format(Formats.YOU_PAYED_FORMAT, requestingUser, amountOfDebt);
+                    ((SplitwiseDatabase) database).addNotification(member.getUsername(), notification);
+                }
             }
         }
 

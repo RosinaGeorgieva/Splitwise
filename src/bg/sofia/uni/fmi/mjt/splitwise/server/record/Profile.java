@@ -8,9 +8,9 @@ import java.util.Set;
 
 public class Profile { // ne v tozi paket
     private String username;
-    //tuk nqkakwi fajlove v koito se pazi statusyt
     private Set<Profile> friends;
     private Set<Group> groups;
+    private boolean setNotifications;
 
     public Profile(String username) {
         this.username = username;
@@ -60,5 +60,13 @@ public class Profile { // ne v tozi paket
 
     public void addGroup(Group group) {
         groups.add(group);
+    }
+
+    public void setNotifications(boolean setNotifications) {
+        this.setNotifications = setNotifications;
+    }
+
+    public boolean hasSetNotifications() {
+        return this.setNotifications;
     }
 }

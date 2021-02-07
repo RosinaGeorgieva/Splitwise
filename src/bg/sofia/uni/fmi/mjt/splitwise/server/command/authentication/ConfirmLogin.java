@@ -22,7 +22,7 @@ public class ConfirmLogin extends AuthenticationCommand {
 
         UserCredentials userCredentials = new UserCredentials(username, password);
         if (!authDatabase.getUserCredentialsRepository().contains(userCredentials)) {
-            return String.format(Messages.UNSUCCESSFUL_LOGIN, Delimiters.LINE_SEPARATOR);
+            return String.format(Messages.INCORRECT_CREDENTIALS, Delimiters.LINE_SEPARATOR);
         }
 
         Integer sessionId = command.sessionId();

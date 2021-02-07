@@ -5,6 +5,10 @@ import bg.sofia.uni.fmi.mjt.splitwise.server.util.finals.Delimiters;
 
 public class DebtRepository extends AbstractRepository<Debt> {
 
+    public DebtRepository() {
+
+    }
+
     public DebtRepository(String fileName) {
         super(fileName);
     }
