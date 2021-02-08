@@ -5,7 +5,7 @@ import bg.sofia.uni.fmi.mjt.splitwise.client.AbstractClient;
 import java.util.Scanner;
 
 public class SplitwiseClient extends AbstractClient {
-    private static final String DISCONNECTED_FROM_SERVER = "[ Disconnected from server ]" + System.lineSeparator();
+    private static final String DISCONNECTED_FROM_SERVER = "[ Disconnected from server ]" + System.lineSeparator(); //da se manat ot tuk
     private static final String REQUEST_INPUT = "=> ";
 
     public SplitwiseClient(int serverPort) {

@@ -23,8 +23,8 @@ public class Logout extends SplitwiseCommand {
     }
 
     private String extractUsername(String authResponse) {
-        int startOfName = authResponse.indexOf(Delimiters.DASH) + 1;
-        int endOfName = authResponse.lastIndexOf(Delimiters.DASH);
+        int startOfName = authResponse.indexOf(Delimiters.TILDA) + 1;
+        int endOfName = authResponse.lastIndexOf(Delimiters.TILDA);
         return authResponse.substring(startOfName, endOfName);
     }
 }

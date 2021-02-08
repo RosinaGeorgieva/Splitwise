@@ -32,7 +32,6 @@ public class Login extends SplitwiseCommand {
         }
 
         StringBuilder response = new StringBuilder();
-        response.append(Delimiters.LINE_SEPARATOR);
         response.append(authResponse);
         response.append(Messages.NOTIFICATIONS);
 
@@ -40,9 +39,9 @@ public class Login extends SplitwiseCommand {
             response.append(String.format(Messages.NO_NOTIFICATIONS, Delimiters.LINE_SEPARATOR));
         } else {
             response.append(notifications.stream().collect(Collectors.joining()));
+            response.append(Delimiters.LINE_SEPARATOR);
         }
 
-        response.append(Delimiters.LINE_SEPARATOR);
         return response.toString();
     }
 

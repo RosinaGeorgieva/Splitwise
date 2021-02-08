@@ -1,6 +1,10 @@
 package bg.sofia.uni.fmi.mjt.splitwise.client;
 
+import bg.sofia.uni.fmi.mjt.splitwise.server.util.finals.Filenames;
+import bg.sofia.uni.fmi.mjt.splitwise.server.util.finals.Messages;
+
 import java.io.BufferedReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UncheckedIOException;
@@ -37,7 +41,8 @@ public abstract class AbstractClient implements Client {
             socketChannel.connect(new InetSocketAddress(SERVER_HOST, serverPort));
             isConnectedToServer = true;
         } catch (IOException exception) {
-            throw new UncheckedIOException(exception.getMessage(), exception);
+            System.out.println(Messages.CONNECTION_ERROR_MESSAGE);
+            writeToLogFile(Filenames.ERROR_LOG, exception);
         }
     }
 
@@ -51,7 +56,9 @@ public abstract class AbstractClient implements Client {
             return new String(buffer.array(), 0, buffer.limit());
 
         } catch (IOException exception) {
-            throw new UncheckedIOException(exception.getMessage(), exception);
+            System.out.println(Messages.CONNECTION_ERROR_MESSAGE);
+            writeToLogFile(Filenames.ERROR_LOG, exception);
+            return null; //??
         }
     }
 
@@ -61,7 +68,8 @@ public abstract class AbstractClient implements Client {
             isConnectedToServer = false;
             socketChannel.close();
         } catch (IOException exception) {
-            throw new UncheckedIOException(exception.getMessage(), exception);
+            System.out.println(Messages.CONNECTION_ERROR_MESSAGE);
+            writeToLogFile(Filenames.ERROR_LOG, exception);
         }
     }
 
@@ -73,7 +81,16 @@ public abstract class AbstractClient implements Client {
             buffer.flip();
             socketChannel.write(buffer);
         } catch (IOException exception) {
-            //todo
+            System.out.println(Messages.CONNECTION_ERROR_MESSAGE);
+            writeToLogFile(Filenames.ERROR_LOG, exception);
+        }
+    }
+   //navsqkude da se pogrija da se otvarqt otvyn ???????????????
+    private void writeToLogFile(String fileName, Exception exception) { //tozi tip metodi da otidat v dr klas
+        try (var printWriter = new PrintWriter(new FileWriter(fileName, true))) {
+            exception.printStackTrace(printWriter);
+        } catch (IOException ex) {
+            //TODO ???
         }
     }
 }

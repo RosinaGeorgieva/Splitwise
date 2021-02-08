@@ -7,4 +7,5 @@ public final class Filenames {
     public static final String MAN = "resource\\manual.txt";
     public static final String RESOURCE_DIR = "resource\\";
     public static final String HISTORY = "-history.txt";
+    public static final String ERROR_LOG = "resource\\errorLog.txt";
 }

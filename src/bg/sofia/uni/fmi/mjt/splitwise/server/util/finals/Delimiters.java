@@ -9,5 +9,5 @@ public final class Delimiters {
     public static final String OPENING_BRACKET = "\\[";
     public static final String CLOSING_BRACKET = "\\]";
     public static final String TWO_FRIEND_GROUP = "two-friend-group";
-    public static final String DASH = "-";
+    public static final String TILDA = "~";
 }

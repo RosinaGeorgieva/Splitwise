@@ -44,7 +44,7 @@ public class Split extends SplitwiseCommand {//onova s pogasqvaneto na stari dul
 
         Profile friendProfile = profilesRepository.getByUsername(requestedUser);
         if(friendProfile.hasSetNotifications()) {
-            String notification = String.format(Formats.YOU_PAYED_FORMAT, requestingUser, debtAmount);
+            String notification = String.format(Messages.YOU_OWE, requestingUser, debtAmount, reason, Delimiters.LINE_SEPARATOR);
             ((SplitwiseDatabase) database).addNotification(requestedUser, notification);
         }
 

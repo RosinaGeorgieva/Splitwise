@@ -52,7 +52,7 @@ public class SplitGroup  extends SplitwiseCommand {
                 Debt debt = new Debt(member.getUsername(), requestingUser, amountOfDebt, reason);
                 splitwiseDatabase.getDebtRepository().add(debt);
                 if(member.hasSetNotifications()) {
-                    String notification = String.format(Formats.YOU_PAYED_FORMAT, requestingUser, amountOfDebt);
+                    String notification = String.format(Formats.YOU_OWE_FORMAT, requestingUser, amountOfDebt, reason, Delimiters.LINE_SEPARATOR);
                     ((SplitwiseDatabase) database).addNotification(member.getUsername(), notification);
                 }
             }
